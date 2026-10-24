@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, sans-serif;
+  color: #f2f6fa;
+  background: linear-gradient(#0b4fa8, #3c86d0 60%, #c9ddf0);
+}
+
+#screen { text-align: center; }
+
+button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  font-weight: 700;
+  color: #1f4a24;
+  background: #a5e04a;
+  border: 0;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+canvas { display: block; border-radius: 0.5rem; }

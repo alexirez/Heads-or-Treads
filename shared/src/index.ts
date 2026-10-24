@@ -1,0 +1,1 @@
+export const GAME_NAME: string = 'Heads or Treads';
