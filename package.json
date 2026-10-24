@@ -21,5 +21,8 @@
     "dev": "pnpm --filter @hot/server dev",
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }
