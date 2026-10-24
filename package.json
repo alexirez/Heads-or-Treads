@@ -2,7 +2,7 @@
   "name": "heads-or-treads",
   "version": "0.1.0",
   "private": true,
-  "description": "Simultaneous-turn 3D isometric tank duel where every move is a gamble. Peer-to-peer WebRTC, deterministic lockstep, TypeScript, Three.js, htmx, Angular.",
+  "description": "3D isometric, turn-based combat. Predict your enemy's moves to be the last survivor on the valley.",
   "keywords": [
     "typescript",
     "threejs",
