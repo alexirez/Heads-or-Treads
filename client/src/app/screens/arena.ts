@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {
+  Component, DestroyRef, ElementRef, afterNextRender, inject, viewChild
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -10,7 +12,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
   template: `
     <div class="stage" #stage>
       <canvas #canvas></canvas>
-      <a routerLink="/">Back</a>
+      <a class="back" routerLink="/">Back</a>
       <p class="hint">Drag to rotate · scroll to zoom</p>
     </div>
   `,
@@ -48,7 +50,19 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
     }
   `,
 })
-export class ArenaScreen {}
+
+export class ArenaScreen {
+  private canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  private stage = viewChild.required<ElementRef<HTMLElement>>('stage');
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const stop = startScene(this.canvas().nativeElement, this.stage().nativeElement);
+      destroyRef.onDestroy(stop);
+    });
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Plain Three.js, with no Angular inside. Later this can move to its own file.
@@ -75,7 +89,7 @@ function startScene(canvas: HTMLCanvasElement, stage: HTMLElement): () => void {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.toneMapping = THREE.NeutralToneMapping;
 
   // 2. Scene: the container for everything you can see
