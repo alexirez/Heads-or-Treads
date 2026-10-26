@@ -1,23 +1,16 @@
-import {
-  Component,
-  DestroyRef,
-  ElementRef,
-  NgZone,
-  afterNextRender,
-  inject,
-  output,
-  viewChild,
-} from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
 @Component({
   selector: 'app-arena',
+  imports: [RouterLink],
   template: `
     <div class="stage" #stage>
       <canvas #canvas></canvas>
-      <button class="back" (click)="back.emit()">Back</button>
+      <a routerLink="/">Back</a>
       <p class="hint">Drag to rotate · scroll to zoom</p>
     </div>
   `,
@@ -55,26 +48,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
     }
   `,
 })
-export class ArenaScreen {
-  back = output<void>();
-
-  private canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
-  private stage = viewChild.required<ElementRef<HTMLElement>>('stage');
-  private zone = inject(NgZone);
-
-  constructor() {
-    const destroyRef = inject(DestroyRef);
-
-    // Runs once the template exists in the browser's DOM
-    afterNextRender(() => {
-      // Keep the 60-per-second render loop out of Angular's change detection
-      const stop = this.zone.runOutsideAngular(() =>
-        startScene(this.canvas().nativeElement, this.stage().nativeElement),
-      );
-      destroyRef.onDestroy(stop); // clean up when leaving this screen
-    });
-  }
-}
+export class ArenaScreen {}
 
 // ---------------------------------------------------------------------------
 // Plain Three.js, with no Angular inside. Later this can move to its own file.

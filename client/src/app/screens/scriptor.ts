@@ -1,12 +1,12 @@
-import { Component, output } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-scriptor',
+  imports: [RouterLink],
   template: `
     <p>Bot script editor coming soon.</p>
-    <button (click)="back.emit()">Back</button>
+    <a routerLink="/">Back</a>
   `,
 })
-export class ScriptorScreen {
-  back = output<void>();
-}
+export class ScriptorScreen {}
