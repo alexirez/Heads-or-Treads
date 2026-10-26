@@ -1,0 +1,62 @@
+@if (editing.script(); as script) {
+  <div class="editor" cdkDropListGroup>
+    <header class="bar">
+      <a class="back" routerLink="/scriptor">← Scripts</a>
+      <input
+        #name
+        class="name"
+        type="text"
+        aria-label="Script name"
+        [value]="script.name"
+        (change)="editing.rename(name.value)"
+      />
+      <span class="hint">Drag blocks from the left. Drop a block back on the palette to delete it.</span>
+    </header>
+
+    <aside
+      class="palette"
+      aria-label="Block palette"
+      cdkDropList
+      cdkDropListSortingDisabled
+      [cdkDropListData]="paletteTarget"
+      [cdkDropListEnterPredicate]="canEnterPalette"
+      (cdkDropListDropped)="editing.drop($event)"
+    >
+      @for (section of sections; track section.title) {
+        <h2>{{ section.title }}</h2>
+        @for (item of section.items; track item.def.type) {
+          <app-block
+            cdkDrag
+            [cdkDragData]="item.def"
+            [cdkDragDisabled]="item.def.kind === 'hat' && editing.hasHat()"
+            [block]="item.preview"
+            [preview]="true"
+          />
+        }
+      }
+    </aside>
+
+    <main class="workspace">
+      <div
+        class="stack"
+        aria-label="Script"
+        cdkDropList
+        [cdkDropListData]="stackTarget"
+        [cdkDropListEnterPredicate]="canEnterStack"
+        [cdkDropListSortPredicate]="canSort"
+        (cdkDropListDropped)="editing.drop($event)"
+      >
+        @for (block of editing.blocks(); track block.id; let i = $index) {
+          <!-- Earlier blocks sit above later ones so each bump covers the next block's notch. -->
+          <app-block
+            cdkDrag
+            [cdkDragData]="block"
+            [cdkDragDisabled]="isHat(block)"
+            [block]="block"
+            [style.z-index]="editing.blocks().length - i"
+          />
+        }
+      </div>
+    </main>
+  </div>
+}

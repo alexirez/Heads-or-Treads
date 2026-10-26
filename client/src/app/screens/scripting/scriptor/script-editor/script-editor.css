@@ -1,0 +1,88 @@
+:host {
+  position: fixed;
+  inset: 0;
+  display: block;
+  color: #e8eef4;
+  font-family: system-ui, sans-serif;
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: 17rem 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  background: #14202b;
+}
+
+.bar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: #0e1821;
+  border-bottom: 1px solid #263847;
+}
+
+.back {
+  color: #a5e04a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.name {
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  background: #1c2b38;
+  border: 1px solid #263847;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.hint {
+  margin-left: auto;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.palette {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1rem;
+  overflow: auto;
+  background: #1a2733;
+  border-right: 1px solid #263847;
+}
+
+.palette h2 {
+  margin: 0.6rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.palette.cdk-drop-list-receiving {
+  outline: 2px dashed #d9482b; /* hint that dropping here deletes */
+  outline-offset: -6px;
+}
+
+.workspace {
+  overflow: auto;
+  padding: 2rem;
+  background-color: #14202b;
+  background-image: radial-gradient(#22333f 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 12rem;
+  min-width: 18rem;
+  padding-bottom: 4rem;
+}

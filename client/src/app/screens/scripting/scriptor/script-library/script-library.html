@@ -1,0 +1,28 @@
+<main class="library">
+  <a class="back" routerLink="/">← Home</a>
+  <h1>Bot scripts</h1>
+  <p class="intro">Scripts tell your bots what to do each turn. Build one, then equip it later.</p>
+
+  <button class="new" type="button" (click)="create()">New script</button>
+
+  @if (store.scripts().length === 0) {
+    <p class="empty">No scripts yet. Make your first one!</p>
+  } @else {
+    <ul class="list">
+      @for (script of store.scripts(); track script.id) {
+        <li class="card">
+          <a class="open" [routerLink]="['/scriptor', script.id]">{{ script.name }}</a>
+          <span class="meta">{{ countBlocks(script.blocks) }} blocks</span>
+          <button
+            class="delete"
+            type="button"
+            [attr.aria-label]="'Delete ' + script.name"
+            (click)="store.remove(script.id)"
+          >
+            Delete
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</main>

@@ -1,0 +1,122 @@
+<div class="body">
+  <!--
+    The block's outline. No viewBox, so 100% means real pixels and the rounded corners
+    never stretch. Nested <svg>s with a percentage y pin the notch and bump to the edges.
+  -->
+  <svg class="shape" aria-hidden="true" focusable="false">
+    @switch (kind()) {
+      @case ('value') {
+        <rect class="fill" width="100%" height="100%" rx="16" ry="16" />
+      }
+      @case ('hat') {
+        <rect class="fill" width="100%" height="100%" rx="6" ry="6" />
+        <svg x="0" y="0" overflow="visible">
+          <path class="fill" d="M0 0 C8 -16 56 -16 64 0 Z" />
+        </svg>
+        <svg x="16" y="100%" overflow="visible">
+          <path class="fill" d="M0 0 H40 L34 6 H6 Z" />
+        </svg>
+      }
+      @default {
+        <rect class="fill" width="100%" height="100%" rx="6" ry="6" />
+        <svg x="16" y="0" overflow="visible">
+          <path class="notch" d="M0 0 H40 L34 6 H6 Z" />
+        </svg>
+        <svg x="16" y="100%" overflow="visible">
+          <path class="fill" d="M0 0 H40 L34 6 H6 Z" />
+        </svg>
+      }
+    }
+  </svg>
+
+  <span class="content">
+    @switch (block().type) {
+      @case ('on-game-start') {
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 3v18M6 4h11l-2.5 4L17 12H6" />
+        </svg>
+        {{ label() }}
+      }
+      @case ('aim-at') {
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="6" />
+          <path d="M12 2v5M12 17v5M2 12h5M17 12h5" />
+        </svg>
+        {{ label() }}
+        <div
+          class="slot"
+          [class.filled]="child()"
+          cdkDropList
+          cdkDropListSortingDisabled
+          [cdkDropListData]="slotTarget()"
+          [cdkDropListEnterPredicate]="canEnterSlot"
+          [cdkDropListDisabled]="preview()"
+          (cdkDropListDropped)="editing.drop($event)"
+        >
+          @if (child(); as inner) {
+            <app-block cdkDrag [cdkDragData]="inner" [block]="inner" />
+          }
+        </div>
+      }
+      @case ('shoot') {
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 12h9" />
+          <path d="M12 7l9 5-9 5z" />
+        </svg>
+        {{ label() }}
+      }
+      @case ('angle') {
+        {{ label() }}
+        <input
+          #degrees
+          class="field"
+          type="number"
+          min="0"
+          max="359"
+          step="1"
+          aria-label="Angle in degrees"
+          [value]="block().fields['degrees']"
+          [disabled]="preview()"
+          (change)="setDegrees(degrees)"
+        />
+        <span aria-hidden="true">°</span>
+      }
+      @case ('target') {
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <circle cx="12" cy="12" r="4.5" />
+        </svg>
+        {{ label() }}
+        <select
+          #which
+          class="field"
+          aria-label="Target"
+          [disabled]="preview()"
+          (change)="setField('which', which.value)"
+        >
+          @for (option of targetOptions; track option.value) {
+            <option [value]="option.value" [selected]="option.value === block().fields['which']">
+              {{ option.label }}
+            </option>
+          }
+        </select>
+      }
+      @case ('current') {
+        {{ label() }}
+        <select
+          #value
+          class="field"
+          aria-label="Current value"
+          [disabled]="preview()"
+          (change)="setField('value', value.value)"
+        >
+          @for (option of currentOptions; track option.value) {
+            <option [value]="option.value" [selected]="option.value === block().fields['value']">
+              {{ option.label }}
+            </option>
+          }
+        </select>
+      }
+    }
+  </span>
+</div>
