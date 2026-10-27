@@ -8,8 +8,8 @@ import {
   createBlock,
   isInstance,
   kindOf,
-} from '../blocks/blocks';
-import { Block } from '../blocks/block';
+} from '../../../scripting/blocks';
+import { Block } from '../block/block';
 import { DropTarget, ScriptEditing } from '../script-editing';
 
 @Component({

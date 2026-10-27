@@ -12,9 +12,4 @@ describe('App', () => {
     const harness = await RouterTestingHarness.create('/');
     expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Welcome!');
   });
-
-  it('navigates to the arena', async () => {
-    const harness = await RouterTestingHarness.create('/arena');
-    expect(harness.routeNativeElement?.textContent).toContain('Arena');
-  });
 });

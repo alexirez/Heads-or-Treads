@@ -1,4 +1,4 @@
-import { BlockInstance, createBlock } from './scriptor/blocks/blocks';
+import { BlockInstance, createBlock } from './blocks';
 import { setInput } from './block-tree';
 
 export interface Script {

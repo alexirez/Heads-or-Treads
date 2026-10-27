@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { BlockInstance } from './blocks/blocks';
+import { BlockInstance } from '../../scripting/blocks';
 import { Script, createScript, createStarterScript } from '../../scripting/script';
 
 /** Holds every script the player has made. In memory only for now. */

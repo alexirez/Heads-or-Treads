@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { countBlocks } from '../../block-tree';
+import { countBlocks } from '../../../scripting/block-tree';
 import { ScriptStore } from '../script-store';
 
 @Component({

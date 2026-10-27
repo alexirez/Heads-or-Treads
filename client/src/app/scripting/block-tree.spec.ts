@@ -1,5 +1,5 @@
 import { createBlock } from './blocks';
-import { countBlocks, insertAt, removeBlock, setInput, updateBlock } from '../../block-tree';
+import { countBlocks, insertAt, removeBlock, setInput, updateBlock } from './block-tree';
 
 describe('block tree', () => {
   it('inserts at an index without mutating the original', () => {

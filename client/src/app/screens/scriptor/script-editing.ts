@@ -3,8 +3,8 @@ import { Injectable, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { insertAt, removeBlock, setInput, updateBlock } from '../block-tree';
-import { DragData, createBlock, isInstance, kindOf } from './blocks/blocks';
+import { insertAt, removeBlock, setInput, updateBlock } from '../../scripting/block-tree';
+import { DragData, createBlock, isInstance, kindOf } from '../../scripting/blocks';
 import { ScriptStore } from './script-store';
 
 /** Describes a place a block can be dropped. Passed to each list as [cdkDropListData]. */

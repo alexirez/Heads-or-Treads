@@ -7,7 +7,7 @@ import {
   DragData,
   TARGET_OPTIONS,
   kindOf,
-} from './blocks';
+} from '../../../scripting/blocks';
 import { DropTarget, ScriptEditing } from '../script-editing';
 
 /** Draws one block (and, recursively, whatever is plugged into its slot). */

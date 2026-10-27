@@ -1,4 +1,4 @@
-import { BlockInstance } from './scriptor/blocks/blocks';
+import { BlockInstance } from './blocks';
 
 // Pure helpers that return new arrays/objects instead of mutating, so signals notice changes.
 

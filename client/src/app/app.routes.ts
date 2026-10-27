@@ -12,7 +12,8 @@ export const routes: Routes = [
   },
   {
     path: 'scriptor',
-    loadComponent: () => import('./screens/scriptor').then((m) => m.ScriptorScreen),
+    loadChildren: () =>
+      import('./screens/scriptor/scriptor.routes').then((m) => m.SCRIPTOR_ROUTES),
   },
   { path: '**', redirectTo: '' },
 ];
